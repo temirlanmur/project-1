@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+
+{% block title %}
+    Create New Entry
+{% endblock title %}
+
+{% block body %}
+    {% if already_exists %}
+        <h2 style="color: red">The entry you are trying to save already exists</h1>
+    {% endif %}
+    <form action="{% url 'create_new_entry' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Save New Entry">
+    </form> 
+{% endblock body %}
