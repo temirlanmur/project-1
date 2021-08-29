@@ -43,5 +43,25 @@ def edit_entry(request, title):
     })
 
 
+def create_new_entry(request):
+    already_exists = False
+    if request.method == "POST":        
+        form = util.EntryForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]            
+            already_exists = util.entry_exists(title)
+            if not already_exists:
+                util.save_entry(title, content)
+                return redirect('entry_detail', title)
+    else:
+        form = util.EntryForm()
+    
+    return render(request, "encyclopedia/create_new_entry.html", {
+        "form": form,
+        "already_exists": already_exists
+    })
+
+
 def not_found(request):
     return render(request, 'encyclopedia/not_found.html')
