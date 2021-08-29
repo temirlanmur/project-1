@@ -54,3 +54,12 @@ def convert_to_html(md_content):
     Converts the markdown-formatted text to html using markdown2 module.
     """
     return markdown2.markdown(md_content)
+
+
+def entry_exists(title):
+    """
+    Checks the existence of encyclopedia entry, given the title.
+    """
+    if default_storage.exists(f"entries/{title}.md"):
+        return True
+    return False
