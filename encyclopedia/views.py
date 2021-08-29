@@ -63,5 +63,17 @@ def create_new_entry(request):
     })
 
 
+def search(request):
+    query = request.GET.get('q')
+    matches = util.search_helper(query)
+    if type(matches) == str:
+        return redirect('entry_detail', title=matches)
+        
+    return render(request, "encyclopedia/search_results.html", {
+        "query": query,
+        "matching_entries": matches
+    })
+
+
 def not_found(request):
     return render(request, 'encyclopedia/not_found.html')
