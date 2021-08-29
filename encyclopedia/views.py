@@ -18,3 +18,7 @@ def entry_detail(request, title):
         })
     
     return redirect('not_found')
+
+
+def not_found(request):
+    return render(request, 'encyclopedia/not_found.html')
