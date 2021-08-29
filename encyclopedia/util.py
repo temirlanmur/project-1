@@ -1,8 +1,17 @@
 import re
 from . import markdown2
 
+from django import forms
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+
+
+class EntryForm(forms.Form):
+    title = forms.CharField(label="Title", max_length=100)
+    content = forms.CharField(widget=forms.Textarea, label="Content")
+
+    def hide_title(self):
+        self.fields['title'].widget.attrs['readonly'] = True
 
 
 def list_entries():
