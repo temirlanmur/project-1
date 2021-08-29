@@ -63,3 +63,22 @@ def entry_exists(title):
     if default_storage.exists(f"entries/{title}.md"):
         return True
     return False
+
+
+def search_helper(query):
+    """
+    Given the query, returns
+        either the name of encyclopedia entry that is equivalent to it,
+        or the list of entries' names that match it.
+    If none of the entries' names match the query, returns empty list
+    """
+    query = query.lower()
+    entries_list = list_entries()
+    matching_entries = []
+    for entry in entries_list:
+        entry_l = entry.lower()
+        if query == entry_l:
+            return entry
+        if query in entry_l:
+            matching_entries.append(entry)
+    return matching_entries
