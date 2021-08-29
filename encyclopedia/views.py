@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from . import util
 
@@ -8,3 +8,13 @@ def index(request):
         "entries": util.list_entries()
     })
 
+
+def entry_detail(request, title):
+    entry = util.get_entry(title)
+    if entry:
+        return render(request, "encyclopedia/entry_detail.html", {
+            "title": title,
+            "content": util.convert_to_html(entry)
+        })
+    
+    return redirect('not_found')
