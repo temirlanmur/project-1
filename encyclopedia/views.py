@@ -21,13 +21,13 @@ def entry_detail(request, title):
 
 
 def edit_entry(request, title):
-    if not util.get_entry(title):
+    if not util.entry_exists(title):
         return redirect('not_found')
 
     if request.method == "POST":
         form = util.EntryForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data["title"]             
+            title = form.cleaned_data["title"]        
             content = form.cleaned_data["content"]
             util.save_entry(title, content)
             return redirect('entry_detail', title)         
