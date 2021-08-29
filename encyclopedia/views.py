@@ -75,5 +75,9 @@ def search(request):
     })
 
 
+def random_entry(request):
+    return redirect('entry_detail', title=util.get_random_entry())
+
+
 def not_found(request):
     return render(request, 'encyclopedia/not_found.html')
