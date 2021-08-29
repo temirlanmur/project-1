@@ -1,4 +1,5 @@
 import re
+import random
 from . import markdown2
 
 from django import forms
@@ -82,3 +83,10 @@ def search_helper(query):
         if query in entry_l:
             matching_entries.append(entry)
     return matching_entries
+
+
+def get_random_entry():
+    """
+    Returns the name of encyclopedia entry chosen randomly
+    """
+    return random.choice(list_entries())
